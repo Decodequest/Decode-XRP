@@ -2,7 +2,7 @@
 
 ## Start the Server
 
-- Open a new terminal and go to the server folder:
+- Open a terminal and go to the server folder:
 
 ```
 $ cd server
