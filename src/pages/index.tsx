@@ -1,16 +1,14 @@
-import { Inter } from "next/font/google";
-import { useEffect, useState } from "react";
-
-const inter = Inter({ subsets: ["latin"] });
+import Container from "@/components/Container";
+import Head from "next/head";
 
 export default function Home() {
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="flex flex-col items-center">
-        <h1 className="text-4xl font-bold text-center">Decode</h1>
-      </div>
-    </main>
+    <>
+      <Head>
+        <title>Decode</title>
+        <meta name="description" content="Modules" />
+        <link rel="icon" href="/favicon.png" />
+      </Head>
+    </>
   );
 }
