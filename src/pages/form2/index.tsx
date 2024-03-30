@@ -27,7 +27,7 @@ const Form2 = () => {
           help us know you better
         </p>
         <div className="p-4">
-          <div className="w-[90%] bg-[#080714]">
+          <div className="w-[90%]">
             <div
               className="bg-[#fff] h-1.5 rounded-full"
               style={{ width: "20%" }}
