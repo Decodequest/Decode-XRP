@@ -142,12 +142,26 @@ function XPRLWallet() {
 
   return (
     <>
-      <button onClick={login} className="text-white">
-        Web3Auth Xrpl
-      </button>
-      <button onClick={getAccounts} className="card">
+    <div className="flex justify-between items-center text-white px-10 py-5">
+      <div className="flex">
+        <div className="bg-white rounded-md">
+          <img src="web3auth.png" className="w-10 h-10" />
+        </div>
+        <div className="flex justify-center">
+            <button onClick={login} className="pl-5 text-[20px]">
+              {" "}
+              Web3Auth Xrpl
+            </button>
+        </div>
+      </div>
+      <div className="flex justify-center">
+        <img src="arrow.png" className="w-5 h-5" />
+      </div>
+
+      {/* <button onClick={getAccounts} className="card">
         Get Accounts
-      </button>
+      </button> */}
+    </div>
     </>
   );
 }

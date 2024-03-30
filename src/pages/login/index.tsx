@@ -7,9 +7,11 @@ const Login = () => {
   return(
     <Container>
         <div className="bg-[#080714] w-full bg-opacity-[70%] h-[500px]">
-          <p className="text-white">Connect wallet to start learning</p>
-          <Metamask/>
+          <p className="text-white text-center flex justify-center text-[39px] px-10 py-5">
+            Connect wallet to start learning
+          </p>
           <XPRLWallet/>
+          <Metamask/>
         </div>
     </Container>
   )
