@@ -13,8 +13,8 @@ export default function Home() {
   const apiCallMint = async () => {
     const response = await axios.post("http://localhost:8080/api/v1/mint", {}, {
       params: {
-        user: "Username"
-      }    
+        walletID: "67ZamOrDzg1asK7CDrxq"
+      }
     });
 
     setHash(response.data.Hash);
@@ -57,7 +57,7 @@ export default function Home() {
                   <Image
                       src={ipfsImg}
                       alt="NFT Image"
-                      width={450}
+                      width={350}
                       height={150}
                       priority
                   />
