@@ -11,8 +11,7 @@ app.post("/api/v1/mint", async (req, res) => {
     let hash, metadatas, img;
 
     try {
-        console.log(req.query.user);
-        [hash, metadatas, img] = await mintToken();
+        [hash, metadatas, img] = await mintToken(req.query.walletID);
     } catch (error) {
         console.error(error);
     }

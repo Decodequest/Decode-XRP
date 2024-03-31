@@ -2,7 +2,7 @@ import { NFTStorage } from "nft.storage";
 import mime from 'mime'
 import fs from 'fs'
 import path from 'path'
-import * as dotenv from 'dotenv'
+import dotenv from 'dotenv'
 dotenv.config()
 
 async function fileFromPath(filePath) {
@@ -11,21 +11,21 @@ async function fileFromPath(filePath) {
     return new File([content], path.basename(filePath), { type })
 }
 
-export default async function sendToIPFS() {
+export default async function sendToIPFS(userData) {
   const NFT_STORAGE_API_KEY = process.env.NFT_STORAGE_API_KEY;
 
   console.log("Preparing Metadata...");
 
-  const image = await fileFromPath("img/1.png")
+  const image = await fileFromPath(`img/${userData.RankXRPL}.png`)
 
   const nft = {
     image: image,
-    name: "Name",
+    name: userData.Name,
     description: "Raw Description",
     properties: {
-        strength: "11",
-        speed: "7",
-        intelligence: "6",
+        strength: userData.PropertiesXRPL.Strength,
+        speed: userData.PropertiesXRPL.Speed,
+        accuracy: userData.PropertiesXRPL.Accuracy,
     }
   };
 
@@ -34,7 +34,6 @@ export default async function sendToIPFS() {
   const client = new NFTStorage({ token: NFT_STORAGE_API_KEY });
   const metadata = await client.store(nft);
   const img = metadata.data.image.href;
-  console.log(img)
   console.log("NFT data stored successfully 🚀");
   console.log("Metadata URI: ", metadata.url);
 
