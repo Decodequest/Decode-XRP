@@ -1,7 +1,11 @@
 import Container from "@/components/Container";
+import { useStateContext } from "@/context/ThemeContext";
+import Link from "next/link";
 import React from "react";
 
 const Form = () => {
+  const { userDeatils, setUserDetails } = useStateContext();
+
   return (
     <Container>
       <div className="bg-[#080714] w-full bg-opacity-[70%] h-[500px]">
@@ -32,17 +36,19 @@ const Form = () => {
               type="text"
               name="search"
               id="search"
-              className="block w-[90%]  border-1 border-[#D7D7D7] py-1.5 pr-10 bg-[#000000]"
+              className="block text-white w-[90%]  border-1 border-[#D7D7D7] py-1.5 px-3 bg-[#000000]"
             />
           </div>
         </div>
         <div className="pt-8 pl-14">
+          <Link href="/form2">
           <button
             type="button"
             className="rounded w-[90%] bg-[#fff] px-2 py-2 text-sm font-semibold text-black  "
           >
             Continue
           </button>
+          </Link>
         </div>
       </div>
     </Container>

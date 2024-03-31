@@ -1,4 +1,5 @@
 import Container from "@/components/Container";
+import Link from "next/link";
 import React from "react";
 
 const Form4 = () => {
@@ -50,12 +51,14 @@ const Form4 = () => {
               ))}
             </div>
             <div className="flex  pt-1 pl-4 gap-6">
-              <button
-                type="button"
-                className="bg-black px-10 py-2 text-xs font-bold text-white border border-1 border-white"
-              >
-                Back
-              </button>
+              <Link href="/form3">
+                <button
+                  type="button"
+                  className="bg-black px-10 py-2 text-xs font-bold text-white border border-1 border-white"
+                >
+                  Back
+                </button>
+              </Link>
               <button
                 type="button"
                 className="bg-white  w-[240px] text-sm font-bold text-black"

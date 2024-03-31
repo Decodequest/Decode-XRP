@@ -1,24 +1,38 @@
 
 import React, { createContext, useContext, useState } from 'react';
 
-interface State {
-    account: any;
-    handleAccount: any
-}
+// interface State {
+//     account: any;
+//     handleAccount: any
+//     userDeatils: any
+//     setUserDetails: any
+// }
 
 // Create a context with initial state
-const StateContext = createContext<State | undefined>(undefined);
+const StateContext = createContext<any | undefined>(undefined);
 // Provider component to wrap your app with
 export const StateProvider: any = ({ children }: any) => {
   // Initialize state
   const [account, setAccount] = useState<any>();
+  const [accountDetails, setAccountDetails] = useState<any>({
+    account: "",
+    balance: "",
+    chainId: "",
+  });
+  const [userDeatils, setUserDetails] = useState({
+    name: "",
+    goal: "",
+    skills: "",
+    intrest: ""
+  });
+
   // Define functions to update the state
   const handleAccount: any = (id: any) => {
     setAccount(id);
   };
   // Provide the state and updater functions to the context
   return (
-    <StateContext.Provider value={{ account, handleAccount }}>
+    <StateContext.Provider value={{ account, handleAccount, setUserDetails, userDeatils }}>
       {children}
     </StateContext.Provider>
   );
