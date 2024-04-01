@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { XrplPrivateKeyProvider } from "@web3auth/xrpl-provider";
-import {
-  SafeEventEmitterProvider,
-  getChainConfig,
-  CHAIN_NAMESPACES,
-} from "@web3auth/base";
+import { CHAIN_NAMESPACES } from "@web3auth/base";
 import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
 import { Web3Auth } from "@web3auth/modal";
 import RPC from "../login/xrplRPC";
+import { useStateContext } from "@/context/ThemeContext";
+import { useRouter } from 'next/router';
 
 const clientId =
   "BGenusTIDE8IORYNOUx31xH1GH4gvBks3cbG0X-2r9a9uWR94dQZCs7P57TWkY7KbgZnF0KhyLTI6wiVX64wdf8"; // get from https://dashboard.web3auth.io
 
 function XPRLWallet() {
+  const { account, handleAccount, setBalance, balance, setChainId } = useStateContext();
+  const router = useRouter();
+
   const [web3auth, setWeb3auth] = useState<any>(null);
   const [provider, setProvider] = useState<any>(null);
 
@@ -42,8 +43,6 @@ function XPRLWallet() {
           config: { chainConfig },
         });
 
-        console.log(privateKeyProvider.config);
-
         const web3auth = new Web3Auth({
           clientId,
           uiConfig: {
@@ -60,7 +59,7 @@ function XPRLWallet() {
             primaryButton: "externalLogin", // "externalLogin" | "socialLogin" | "emailLogin"
             // uxMode: UX_MODE.REDIRECT,
           },
-          web3AuthNetwork: "sapphire_mainnet",
+          web3AuthNetwork: "sapphire_devnet",
           privateKeyProvider,
         });
 
@@ -118,16 +117,6 @@ function XPRLWallet() {
     init();
   }, []);
 
-  const getAccounts = async () => {
-    // if (!provider) {
-    //   uiConsole("provider not initialized yet");
-    //   return;
-    // }
-    const rpc = new RPC(provider);
-    const userAccount = await rpc.getAccounts();
-    console.log("Accpuint info: ", userAccount);
-  };
-
   const login = async () => {
     if (!web3auth) {
       console.log("web3auth not initialized yet");
@@ -136,32 +125,37 @@ function XPRLWallet() {
     const web3authProvider = await web3auth.connect();
     console.log("web3authProvider", web3authProvider);
 
-    // setProvider(web3authProvider!);
-    // setLoggedIn(true);
+    const rpc = new RPC(provider);    
+    console.log("rpc", rpc);
+    
+    const userAccount = await rpc.getAccounts();
+    console.log("userAccount", userAccount);
+    
+    userAccount && router.push('/form');
+    const balanceAmount = await rpc.getBalance();
+    setChainId(chainConfig.chainId)
+    setBalance(balanceAmount)
+    handleAccount(userAccount.account_data.Account);
   };
 
   return (
     <>
-    <div className="flex justify-between items-center text-white px-10 py-5">
-      <div className="flex">
-        <div className="bg-white rounded-md">
-          <img src="web3auth.png" className="w-10 h-10" />
-        </div>
-        <div className="flex justify-center">
+      <div className="flex justify-between items-center text-white px-10 py-5">
+        <div className="flex">
+          <div className="bg-white rounded-md">
+            <img src="web3auth.png" className="w-10 h-10" />
+          </div>
+          <div className="flex justify-center">
             <button onClick={login} className="pl-5 text-[20px]">
               {" "}
               Web3Auth Xrpl
             </button>
+          </div>
+        </div>
+        <div className="flex justify-center">
+          <img src="arrow.png" className="w-5 h-5" />
         </div>
       </div>
-      <div className="flex justify-center">
-        <img src="arrow.png" className="w-5 h-5" />
-      </div>
-
-      {/* <button onClick={getAccounts} className="card">
-        Get Accounts
-      </button> */}
-    </div>
     </>
   );
 }
