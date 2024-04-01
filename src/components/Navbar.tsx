@@ -69,7 +69,7 @@ export default function Example() {
                 </div>
               </div>
               <div className="absolute w-[100px] inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <Link href="#" className="pr-4">
+                <Link href="/profile" className="pr-4">
                     <img className="h-6 w-6" src="/circle.png"/>
                 </Link>
                 <Link href="#">
