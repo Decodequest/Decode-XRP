@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { useStateContext } from "../../context/ThemeContext";
+import { useRouter } from 'next/router';
 
 declare let window: any;
 
@@ -10,8 +11,8 @@ export const formatBalance = (rawBalance: string) => {
 };
 
 const Metamask = () => {
-  const { account, handleAccount } = useStateContext();
-  console.log("account", account);
+  const { account, handleAccount, setBalance, setChainId } = useStateContext();
+  const router = useRouter();
 
   const [hasProvider, setHasProvider] = useState<boolean | null>(null);
   const initialState = { accounts: [] };
@@ -30,7 +31,28 @@ const Metamask = () => {
     let accounts = await window.ethereum.request({
       method: "eth_requestAccounts",
     });
-    handleAccount(accounts);
+    const chainIdNumber = await window.ethereum.request({
+      "method": "eth_chainId",
+      "params": []
+    });
+
+    const blockNumber = await window.ethereum.request({
+      "method": "eth_blockNumber",
+      "params": []
+    });
+    const balanceAmount = await window.ethereum.request({
+      "method": "eth_getBalance",
+      "params": [
+        accounts[0],
+        blockNumber
+      ]
+    });
+
+    setChainId(chainIdNumber)
+    setBalance(balanceAmount)
+    accounts && router.push('/form');
+    
+    handleAccount(accounts[0]);
     updateWallet(accounts);
   };
 

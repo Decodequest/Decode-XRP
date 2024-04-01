@@ -1,16 +1,15 @@
 import Container from "@/components/Container";
 import { useStateContext } from "@/context/ThemeContext";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 const Form = () => {
-  const { userDeatils, setUserDetails } = useStateContext();
+  const { userDeatils, setUserDetails, account } = useStateContext();
+  const [name, setName] = useState();
 
   return (
     <Container>
       <div className="bg-[#080714] w-full bg-opacity-[70%] h-[500px]">
-        {/* <p className="text-white">Connect wallet to start learning</p> */}
-
         <p className="text-white text-center flex justify-center text-[29px] p-10">
           Before we dive in, help <br />
           help us know you better
@@ -37,17 +36,25 @@ const Form = () => {
               name="search"
               id="search"
               className="block text-white w-[90%]  border-1 border-[#D7D7D7] py-1.5 px-3 bg-[#000000]"
+              onInput={(e: any) => setName(e.target.value)}
             />
           </div>
         </div>
         <div className="pt-8 pl-14">
           <Link href="/form2">
-          <button
-            type="button"
-            className="rounded w-[90%] bg-[#fff] px-2 py-2 text-sm font-semibold text-black  "
-          >
-            Continue
-          </button>
+            <button
+              type="button"
+              className="rounded w-[90%] bg-[#fff] px-2 py-2 text-sm font-semibold text-black"
+              onClick={() => {
+                setUserDetails((prevState: any) => ({
+                  ...prevState,
+                  Name: name,
+                  Account: account
+                }));
+              }}
+            >
+              Continue
+            </button>
           </Link>
         </div>
       </div>

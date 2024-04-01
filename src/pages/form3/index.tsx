@@ -1,8 +1,13 @@
 import Container from "@/components/Container";
+import { useStateContext } from "@/context/ThemeContext";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 const Form3 = () => {
+  const { userDeatils, setUserDetails } = useStateContext();  
+  const[skills, setSkills] = useState("");
+
+  const SkillsObj = ["Beginner", "Intermediate", "Advance"]
   return (
     <Container>
       <div className="bg-[#080714] w-full bg-opacity-[70%] h-[600px]">
@@ -32,12 +37,16 @@ const Form3 = () => {
             ></div>
           </div>
           <div className="pt-10 pl-4">
-            <button
-              type="button"
-              className="bg-black px-10 py-3 w-[140px] text-xs font-bold text-white border border-1 border-gray-600"
-            >
-              Beginner
-            </button>
+            {SkillsObj.map((item, index) => {
+              return <button
+                  type="button"
+                  key={index}
+                  onClick={() => setSkills(item)}
+                  className="bg-black px-10 py-3 w-[140px] text-xs font-bold text-white border border-1 border-gray-600"
+                >
+                  {item}
+                </button>
+            })}
           </div>
 
           <div className="flex pt-[124px] gap-6">
@@ -53,6 +62,12 @@ const Form3 = () => {
               <button
                 type="button"
                 className="bg-white px-8 py-3 w-[260px] text-sm font-bold text-black"
+                onClick={() => {
+                  setUserDetails((prevState: any) => ({
+                    ...prevState,
+                    Skills: skills,
+                  }));
+                }}
               >
                 Continue
               </button>

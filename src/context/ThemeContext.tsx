@@ -14,16 +14,27 @@ const StateContext = createContext<any | undefined>(undefined);
 export const StateProvider: any = ({ children }: any) => {
   // Initialize state
   const [account, setAccount] = useState<any>();
+  const [balance, setBalance] = useState();
+  const [chainId, setChainId] = useState();
+  const [firebaseDb, setfirebaseDb] = useState()
   const [accountDetails, setAccountDetails] = useState<any>({
     account: "",
     balance: "",
     chainId: "",
   });
   const [userDeatils, setUserDetails] = useState({
-    name: "",
-    goal: "",
-    skills: "",
-    intrest: ""
+    Account: "",
+    Name: "",
+    Goal: "",
+    Skills: "",
+    Intrest: "",
+    RankXRPL: 0,
+    NFTExists: false,
+    PropertiesXRPL: {
+      Accuracy: 0,
+      Speed: 0,
+      Strength: 0
+    }
   });
 
   // Define functions to update the state
@@ -32,7 +43,7 @@ export const StateProvider: any = ({ children }: any) => {
   };
   // Provide the state and updater functions to the context
   return (
-    <StateContext.Provider value={{ account, handleAccount, setUserDetails, userDeatils }}>
+    <StateContext.Provider value={{ account, handleAccount, setUserDetails, userDeatils, balance, setBalance, setChainId, chainId, setfirebaseDb, firebaseDb }}>
       {children}
     </StateContext.Provider>
   );

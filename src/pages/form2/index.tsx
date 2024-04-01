@@ -1,28 +1,33 @@
 import Container from "@/components/Container";
+import { useStateContext } from "@/context/ThemeContext";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 const Form2 = () => {
+  const { userDeatils, setUserDetails } = useStateContext();
+  const [goal, setGoal] = useState<any>();
   const files = [
     {
       image: "Frame 22.png",
+      name: "Carrer Advancement"
     },
     {
       image: "Frame 22.png",
+      name: "Carrer Advancement"
     },
 
     {
       image: "Frame 23.png",
+      name: "Persnoal Intrest"
     },
     {
       image: "Frame 24.png",
+      name: "Academic Purposes"
     },
   ];
   return (
     <Container>
       <div className="bg-[#080714] w-full bg-opacity-[70%] h-[650px]">
-        {/* <p className="text-white">Connect wallet to start learning</p> */}
-
         <p className="text-white text-center flex justify-center text-[29px] pt-10">
           Before we dive in, help <br />
           help us know you better
@@ -43,7 +48,9 @@ const Form2 = () => {
         <div className="grid grid-cols-2 pt-4 px-2 gap-2">
           {files.map((detail, index) => (
             <div key={index}>
-              <img src={detail.image} alt="image" />
+              <button onClick={() => setGoal(detail.name)}>
+                <img src={detail.image} alt="image" />
+              </button>
             </div>
           ))}
         </div>
@@ -60,6 +67,12 @@ const Form2 = () => {
             <button
               type="button"
               className="bg-white px-10 py-3 text-sm  font-bold text-black w-[260px]"
+              onClick={() => {
+                setUserDetails((prevState: any) => ({
+                  ...prevState,
+                  Goal: goal,
+                }));
+              }}
             >
               Continue
             </button>
