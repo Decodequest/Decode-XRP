@@ -13,7 +13,7 @@ const Dashboard = () => {
         },
         {
             name: "Rust",
-            image: "/Rust.png"
+            image: "/RustCourse.png"
         },
         {
             name: "Cario",
