@@ -23,7 +23,7 @@ const Form5 = () => {
   ];
   const Certificates = [
     {
-      image: "solidity.png",
+      image: "solidityCertificate.png",
     },
     {
       image: "Rust.png",

@@ -9,7 +9,7 @@ const Dashboard = () => {
         },
         {
             name: "Solidity",
-            image: "/Solidity.png"
+            image: "/SolidityCourse.png"
         },
         {
             name: "Rust",
