@@ -3,54 +3,54 @@ import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 const McqDetails = [
   {
     id: 1,
-    question: "What technology does the XRP ledger use to record transactions?",
-    options: ["Internet", "Blockchain", "Satellite", "Radio waves"],
-    correctAnswer: "Blockchain",
+    question: "What main problem does XRP aim to solve?",
+    options: ["Video streaming", "Social networking", " International payments", "Online shopping"],
+    correctAnswer: " International payments",
   },
   {
     id: 2,
     question:
-      "How quickly does the XRP Ledger typically confirm a transaction?",
-    options: ["24 hours", "4-6 seconds", "1 hour", "10 minutes"],
-    correctAnswer: "4-6 seconds",
+    "Why is XRP considered secure?",
+    options: [" It uses a single server", "It is backed by gold", "Its transactions are spread across many computers", "It is regulated by a central bank"],
+    correctAnswer: "Its transactions are spread across many computers.",
   },
   {
     id: 3,
-    question: "What is unique about the XRP Ledger’s control mechanism?",
+    question: "What significant action did Ripple take in 2017 regarding XRP?",
     options: [
-      "Centralized control",
-      "No control",
-      "No central control",
-      "Controlled by a single bank",
+      "Sold all their XRP",
+      "Locked 55 billion XRP in escrow",
+      "Gave away XRP for free",
+      "Bought back XRP from investors",
     ],
-    correctAnswer: "No central control",
+    correctAnswer: "Locked 55 billion XRP in escrow",
   },
   {
     id: 4,
-    question: "Which consensus mechanism does the XRP Ledger use?",
+    question: "How did XRP come into existence?",
     options: [
-      "Proof of Work",
-      "Federated Consensus",
-      "Proof of Stake",
-      "Proof of Authority",
+      "It was mined like Bitcoin.",
+      "It was created in 2011 with a pre-set amount.",
+      "It is created every time a transaction is made",
+      "It was airdropped to existing cryptocurrency holders",
     ],
-    correctAnswer: "Federated Consensus",
+    correctAnswer: "It was created in 2011 with a pre-set amount",
   },
   {
     id: 5,
-    question: "What ensures the safety of transactions on the XRP Ledger?",
-    options: ["Passwords", "Cryptography", "Physical locks", "Security guards"],
-    correctAnswer: "Cryptography",
+    question: "What does the name 'XRP' signify?",
+    options: ["A new type of experiment", "The sound of speed", "A compliance with international currency standards", "The creators' initials"],
+    correctAnswer: "A compliance with international currency standards",
   },
 ];
 
-const FirstTopic = () => {
+const SecondTopic = () => {
   return (
     <div className="bg-[#070C14] pb-24">
       <div className="flex justify-between items-center px-12 py-4 bg-[#070C14] text-white shadow border border-black border-b-[#616069]">
         <div className="">
           <ArrowLeftIcon className="w-5 h-5 inline mb-2" />
-          <p className="text-lg inline ml-2">What is the XRP Ledger?</p>
+          <p className="text-lg inline ml-2">What is XRP and why is it valuable?</p>
         </div>
         <div className="w-[50%] flex justify-center items-center gap-x-4">
           <div className="w-[40%] h-1.5 border border-[#616069] rounded-full">
@@ -71,68 +71,75 @@ const FirstTopic = () => {
         <div className="bg-cover-bg bg-no-repeat text-white max-w-7xl pt-12 w-[45%] px-6">
           <div className="pb-8">
             <h1 className="pb-4">What is the XRP Ledger?</h1>
-            <p>
+            {/* <p>
               The XRP Ledger is a special digital network that helps people send
               money quickly all over the world without needing a middleman, like
               a bank. It uses technology called blockchain, which is like a
               digital ledger that safely records all transactions.
-            </p>
+            </p> */}
           </div>
           <div className="pb-8">
-            <h1 className="pb-4">What makes XRP ledger special?</h1>
+            <h1 className="pb-4">What Makes XRP Unique?</h1>
             <ul className="list-disc pl-6">
               <li>
                 Fast and Global: It can send money anywhere in the world in just
                 a few seconds.
               </li>
               <li>
-                No Central Control: Unlike banks, no single person or group
-                controls the XRP Ledger. It's made by everyone who uses it.
+              Secure: Protected by advanced cryptography, making it almost <br />
+               impossible to hack or counterfeit.
               </li>
               <li>
-                Safe: It keeps money transfers safe using complex math, so only
-                the people involved can see or change their transactions.
+              Decentralized: Not controlled by any government or bank, ensuring <br />
+               freedom and security in transactions
               </li>
             </ul>
           </div>
           <div className="pb-8">
-            <h1 className="pb-4">How does it work?</h1>
-            <p>
-              The XRP Ledger uses a unique method called "federated consensus"
-              to agree on transactions:
-            </p>
+            <h1 className="pb-4">Why People Trust XRP?</h1>
+         
             <ul className="list-disc pl-6">
               <li>
-                Validators: These are computers that check and agree on
-                transactions.
+              Decentralized Security: Spread across many computers, its records are very secure.
               </li>
               <li>
-                Quick Decisions: They make a new record of all transactions
-                every 4 to 6 seconds, which is super fast.
+              Predictable Supply: 55 billion XRP were locked up to control its release over time, ensuring stability.
               </li>
-              <li>
+              {/* <li>
                 Saves Energy: This method doesn't use a lot of electricity,
                 making it better for the planet than some other systems.
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="pb-8">
-            <h1 className="pb-4">Keeping transactions safe</h1>
-            <p>
-              The XRP Ledger uses advanced security to make sure no one can
-              tamper with transactions. Once a transaction is recorded, it
-              cannot be changed, ensuring that your money is always safe.
-            </p>
+            <h1 className="pb-4">XRP's Background</h1>
+            <ul className="list-disc pl-6">
+              <li>
+              Created in 2011, with 100 billion units.
+              </li>
+              <li>
+              Ripple, the company, was given 80 billion XRP to promote and develop the XRP ecosystem.
+              </li>
+              {/* <li>
+                Saves Energy: This method doesn't use a lot of electricity,
+                making it better for the planet than some other systems.
+              </li> */}
+            </ul>
           </div>
           <div className="pb-8">
-            <h1 className="pb-4">In short</h1>
-            <p>
-              The XRP Ledger is a modern way to transfer money that is fast,
-              reliable, and eco-friendly. It uses cutting-edge technology to
-              make sure transactions are secure and works without the need for
-              central banks, making it a promising tool for the future of money
-              transfers.
-            </p>
+            <h1 className="pb-4">The Name "XRP"</h1>
+            <ul className="list-disc pl-6">
+              <li>
+              Chosen to fit international currency standards.
+              </li>
+              <li>
+              Helps avoid confusion with Ripple, the company.
+              </li>
+              {/* <li>
+                Saves Energy: This method doesn't use a lot of electricity,
+                making it better for the planet than some other systems.
+              </li> */}
+            </ul>
           </div>
         </div>
         <div className="bg-[#080714] border border-[#201F2B] rounded-md mx-6">
@@ -170,4 +177,4 @@ const FirstTopic = () => {
   );
 };
 
-export default FirstTopic;
+export default SecondTopic;
