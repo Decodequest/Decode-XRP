@@ -37,10 +37,10 @@ const Dashboard = () => {
     ]
 
     return (
-        <main className="bg-black w-full">
+        <main className="bg-[#070C14] w-full">
             <Navbar/>
             <div className="mx-auto max-w-6xl pt-14">
-                <div className="flex justify-between p-8 border border-black rounded-xl bg-[#0C0D13] shadow-lg">
+                <div className="flex justify-between p-8 border border-black rounded-xl bg-[#0D0E14] shadow-2xl">
                     <div className="flex flex-col justify-between text-white">
                         <div>
                             <h1 className="text-2xl pb-6">Woohhhoooo! You’ve earned your first NFT! Start minting now.</h1>

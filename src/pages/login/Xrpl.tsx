@@ -59,7 +59,7 @@ function XPRLWallet() {
             primaryButton: "externalLogin", // "externalLogin" | "socialLogin" | "emailLogin"
             // uxMode: UX_MODE.REDIRECT,
           },
-          web3AuthNetwork: "sapphire_devnet",
+          web3AuthNetwork: "sapphire_mainnet",
           privateKeyProvider,
         });
 
@@ -132,6 +132,8 @@ function XPRLWallet() {
     console.log("userAccount", userAccount);
     
     userAccount && router.push('/form');
+    console.log("userAccount", userAccount);
+    
     const balanceAmount = await rpc.getBalance();
     setChainId(chainConfig.chainId)
     setBalance(balanceAmount)
