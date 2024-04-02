@@ -1,9 +1,16 @@
+
 import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import axios from "axios";
+import Container from "@/components/Container";
+import Head from "next/head";
+import db from "../../firebase-config";
+import { collection, getDocs } from "firebase/firestore";
 
-const inter = Inter({ subsets: ["latin"] });
+type Props = {
+  details: [];
+};
 
 export default function Home() {
   const [hash, setHash] = useState("");
@@ -67,6 +74,18 @@ export default function Home() {
               <a>Click and wait few seconds...</a>
             )}
       </div>
-    </main>
+    </>
   );
 }
+
+export const getServerSideProps = async () => {
+  const idoCollectionRef = collection(db, "Decode");
+  const doc = await getDocs(idoCollectionRef);
+  const user_details = doc.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+
+  return {
+    props: {
+      details: user_details,
+    },
+  };
+};
