@@ -13,7 +13,7 @@ const StateContext = createContext<any | undefined>(undefined);
 // Provider component to wrap your app with
 export const StateProvider: any = ({ children }: any) => {
   // Initialize state
-  const [account, setAccount] = useState<any>();
+  const [account, setAccount] = useState("");
   const [balance, setBalance] = useState();
   const [chainId, setChainId] = useState();
   const [firebaseDb, setfirebaseDb] = useState()
@@ -23,7 +23,7 @@ export const StateProvider: any = ({ children }: any) => {
     chainId: "",
   });
   const [userDeatils, setUserDetails] = useState({
-    Account: "",
+    Account: account,
     Name: "",
     Goal: "",
     Skills: "",
@@ -43,7 +43,7 @@ export const StateProvider: any = ({ children }: any) => {
   };
   // Provide the state and updater functions to the context
   return (
-    <StateContext.Provider value={{ account, handleAccount, setUserDetails, userDeatils, balance, setBalance, setChainId, chainId, setfirebaseDb, firebaseDb }}>
+    <StateContext.Provider value={{ account, handleAccount, setUserDetails, userDeatils, balance, setBalance, setChainId, chainId, setfirebaseDb, firebaseDb, setAccount }}>
       {children}
     </StateContext.Provider>
   );

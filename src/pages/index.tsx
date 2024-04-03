@@ -15,11 +15,11 @@ type Props = {
 };
 
 export default function Home(details: any) {
-  const { setUserDetails, account } = useStateContext();
+  const { setUserDetails, account, userDeatils } = useStateContext();
 
   useEffect(() => {
     const data = details.details.filter((data: any) => data.id === account);
-    setUserDetails(data[0]);
+    !data && setUserDetails(data[0]);
   }, [account]);
 
   return (

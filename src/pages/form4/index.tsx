@@ -4,9 +4,11 @@ import React from "react";
 import db from "../../../firebase-config";
 import { doc, setDoc, collection, getDocs } from "@firebase/firestore";
 import { useStateContext } from "@/context/ThemeContext";
+import { useRouter } from 'next/router';
 
 const Form4 = () => {
   const { userDeatils, setUserDetails, account } = useStateContext();
+  const router = useRouter();
 
   const files = [
     {
@@ -35,11 +37,14 @@ const Form4 = () => {
   ];
 
   const AddData = async () => {
+    console.log("userDeatils", userDeatils);
+    
     try {
       await setDoc(doc(db, 'Decode', `${account}`), {
-        userDeatils
+        ...userDeatils
       })
       console.log("Added to DB");
+      router.push("/dashboard")
     }catch(err) {
       console.log(err);
     }
@@ -68,7 +73,7 @@ const Form4 = () => {
                 <div key={index}>
                   <button onClick={() => setUserDetails((prevState: any) => ({
                   ...prevState,
-                  Skills: detail.name,
+                  Intrest: detail.name,
                 }))
                 }>
                     <img
@@ -89,13 +94,13 @@ const Form4 = () => {
                   Back
                 </button>
               </Link>
-              <button
-                type="button"
-                className="bg-white  w-[240px] text-sm font-bold text-black"
-                onClick={AddData}
-              >
-                Continue
-              </button>
+                <button
+                  type="button"
+                  className="bg-white px-10 py-3 text-sm font-bold text-black w-[260px]"
+                  onClick={AddData}
+                >
+                  Continue
+                </button>
             </div>
           </div>
         </div>

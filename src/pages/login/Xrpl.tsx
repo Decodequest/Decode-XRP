@@ -13,7 +13,7 @@ const clientId =
   "BGenusTIDE8IORYNOUx31xH1GH4gvBks3cbG0X-2r9a9uWR94dQZCs7P57TWkY7KbgZnF0KhyLTI6wiVX64wdf8"; // get from https://dashboard.web3auth.io
 
 function XPRLWallet(details: any) {
-  const { account, handleAccount, setBalance, balance, setChainId, userDeatils, setUserDetails } = useStateContext();
+  const { account, handleAccount, setBalance, balance, setChainId, userDeatils, setUserDetails, setAccount } = useStateContext();
   const router = useRouter();
 
   const [web3auth, setWeb3auth] = useState<any>(null);
@@ -129,16 +129,13 @@ function XPRLWallet(details: any) {
 
     const rpc = new RPC(provider);    
     console.log("rpc", rpc);
-    
     const userAccount = await rpc.getAccounts();
-    console.log("userAccount", userAccount);
+    !userAccount.status ? setAccount("rDpx9BQ1NFN7FM8TFpzVRrX5kEAejs3wmn") : handleAccount(userAccount.account_data?.Account)
     
     const balanceAmount = await rpc.getBalance();
     setChainId(chainConfig.chainId)
     setBalance(balanceAmount)
-    userAccount ? handleAccount("rDpx9BQ1NFN7FM8TFpzVRrX5kEAejs3wmn") : handleAccount(userAccount.account_data?.Account)
-    console.log("==================", userDeatils);
-    !userDeatils ? router.push('/dashboard') : router.push('/form')
+    !userDeatils.name ? router.push('/form') : router.push('/dashboard')
   }
 
   return (
