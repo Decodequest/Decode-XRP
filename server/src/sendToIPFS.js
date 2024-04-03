@@ -16,7 +16,7 @@ export default async function sendToIPFS(userData) {
 
   console.log("Preparing Metadata...");
 
-  const image = await fileFromPath(`img/${userData.RankXRPL}.png`)
+  const image = await fileFromPath(`img/XRPL/${userData.RankXRPL}.png`)
 
   const nft = {
     image: image,
