@@ -51,7 +51,7 @@ const Form5 = () => {
                   <img src="/Ellipse 4.png" alt="profile photo" />
                   <div>
                     <p className="pt-8 text-white">
-                      {userDeatils.userDeatils.Name} <br />
+                      {userDeatils.Name} <br />
                       Developer
                     </p>
                   </div>
