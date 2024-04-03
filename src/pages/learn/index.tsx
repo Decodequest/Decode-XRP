@@ -1,12 +1,13 @@
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
+import Link from "next/link";
 import React from "react";
 
   const Course = [
-    { name: 'Course1', image:"/xrp/course1.png" },
-    { name: 'Course2', image:"/xrp/course2.png" },
-    { name: 'Course3', image:"/xrp/course3.png" },
-    { name: 'Course4', image:"/xrp/course4.png" },
+    { name: 'Course1', image:"/xrp/course1.png", link: "/course" },
+    { name: 'Course2', image:"/xrp/course2.png", link: "#" },
+    { name: 'Course3', image:"/xrp/course3.png", link: "#" },
+    { name: 'Course4', image:"/xrp/course4.png", link: "#" },
   ]
 
 const LearnDashboard = () => {
@@ -25,7 +26,9 @@ const LearnDashboard = () => {
                     <div className="flex gap-x-6 pt-12">
                         {Course.map((details, index) => {
                             return (
-                                <img key={index} src={details.image}/>
+                                <Link href={details.link}>
+                                    <img key={index} src={details.image}/>
+                                </Link>
                             )
                         })}
                     </div>

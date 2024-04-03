@@ -1,8 +1,10 @@
 import Container from "@/components/Container";
 import Navbar from "@/components/Navbar";
+import { useStateContext } from "@/context/ThemeContext";
 import React from "react";
 
 const Form5 = () => {
+  const { account, userDeatils } = useStateContext();
   const files = [
     {
       image: "Frame 46.png",
@@ -49,7 +51,7 @@ const Form5 = () => {
                   <img src="/Ellipse 4.png" alt="profile photo" />
                   <div>
                     <p className="pt-8 text-white">
-                      Abishek Venunathan <br />
+                      {userDeatils.userDeatils.Name} <br />
                       Developer
                     </p>
                   </div>

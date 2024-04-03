@@ -6,12 +6,14 @@ import { Web3Auth } from "@web3auth/modal";
 import RPC from "../login/xrplRPC";
 import { useStateContext } from "@/context/ThemeContext";
 import { useRouter } from 'next/router';
+import { collection, getDocs } from "firebase/firestore";
+import db from "../../../firebase-config";
 
 const clientId =
   "BGenusTIDE8IORYNOUx31xH1GH4gvBks3cbG0X-2r9a9uWR94dQZCs7P57TWkY7KbgZnF0KhyLTI6wiVX64wdf8"; // get from https://dashboard.web3auth.io
 
-function XPRLWallet() {
-  const { account, handleAccount, setBalance, balance, setChainId } = useStateContext();
+function XPRLWallet(details: any) {
+  const { account, handleAccount, setBalance, balance, setChainId, userDeatils, setUserDetails } = useStateContext();
   const router = useRouter();
 
   const [web3auth, setWeb3auth] = useState<any>(null);
@@ -131,14 +133,13 @@ function XPRLWallet() {
     const userAccount = await rpc.getAccounts();
     console.log("userAccount", userAccount);
     
-    userAccount && router.push('/form');
-    console.log("userAccount", userAccount);
-    
     const balanceAmount = await rpc.getBalance();
     setChainId(chainConfig.chainId)
     setBalance(balanceAmount)
-    handleAccount(userAccount.account_data.Account);
-  };
+    userAccount ? handleAccount("rDpx9BQ1NFN7FM8TFpzVRrX5kEAejs3wmn") : handleAccount(userAccount.account_data?.Account)
+    console.log("==================", userDeatils);
+    !userDeatils ? router.push('/dashboard') : router.push('/form')
+  }
 
   return (
     <>
