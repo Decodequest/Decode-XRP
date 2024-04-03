@@ -36,8 +36,6 @@ export default async function mintToken(walletID) {
       "TransactionType": "NFTokenMint",
       "Account": Wallet1.classicAddress,
       "URI": convertStringToHex(ipfsURL),
-      "Flags": 8,
-      "TransferFee": 1000,
       "NFTokenTaxon": 0
     }
     // console.log(transactionJson.URI);

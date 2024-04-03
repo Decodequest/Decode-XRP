@@ -61,7 +61,7 @@ function XPRLWallet(details: any) {
             primaryButton: "externalLogin", // "externalLogin" | "socialLogin" | "emailLogin"
             // uxMode: UX_MODE.REDIRECT,
           },
-          web3AuthNetwork: "sapphire_devnet",
+          web3AuthNetwork: "sapphire_mainnet",
           privateKeyProvider,
         });
 
