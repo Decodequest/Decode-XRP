@@ -135,7 +135,6 @@ function XPRLWallet(details: any) {
     const balanceAmount = await rpc.getBalance();
     setChainId(chainConfig.chainId)
     setBalance(balanceAmount)
-    !userDeatils.name ? router.push('/form') : router.push('/dashboard')
   }
 
   return (

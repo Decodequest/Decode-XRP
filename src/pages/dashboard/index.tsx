@@ -11,6 +11,8 @@ import Link from "next/link";
 
 const Dashboard = () => {
   const { userDeatils, account, setUserDetails } = useStateContext();
+  console.log("userDeatils", userDeatils);
+  
   const [open, setOpen] = useState(true);
   const [hash, setHash] = useState("");
   const [ipfsUri, setIpfsUri] = useState("");

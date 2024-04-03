@@ -9,6 +9,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { useStateContext } from "@/context/ThemeContext";
 import XPRLWallet from "./login/Xrpl";
 import Metamask from "./login/metamask";
+import { useRouter } from 'next/router';
 
 type Props = {
   details: [];
@@ -16,10 +17,15 @@ type Props = {
 
 export default function Home(details: any) {
   const { setUserDetails, account, userDeatils } = useStateContext();
+  const router = useRouter();
 
   useEffect(() => {
     const data = details.details.filter((data: any) => data.id === account);
-    !data && setUserDetails(data[0]);
+    data.length && setUserDetails(data[0]);
+
+    if(account) {
+      data.length ? router.push('/dashboard') : router.push('/form')
+    }
   }, [account]);
 
   return (
