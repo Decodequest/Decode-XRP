@@ -1,31 +1,29 @@
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { useState } from "react";
 
 const McqDetails = [
   {
     id: 1,
     question: "Who manages the keys in a custodial wallet?",
-    options: [
-      "The user",
-      "A third party",
-      "The XRP Ledger",
-      "No one",
-    ],
+    options: ["The user", "A third party", "The XRP Ledger", "No one"],
     correctAnswer: "A third party",
   },
   {
     id: 2,
-    question:"What is a major benefit of using a non-custodial wallet?",
+    question: "What is a major benefit of using a non-custodial wallet?",
     options: [
-       "Ease of recovery",
+      "Ease of recovery",
       "High convenience for daily use",
       "Full control over assets",
-      " Managed by a professional team",
+      "Managed by a professional team",
     ],
     correctAnswer: "Full control over assets",
   },
   {
     id: 3,
-    question: "Which type of wallet is considered more secure but less convenient for frequent transactions?",
+    question:
+      "Which type of wallet is considered more secure but less convenient for frequent transactions?",
     options: [
       "Custodial wallet",
       "Software wallet",
@@ -36,18 +34,20 @@ const McqDetails = [
   },
   {
     id: 4,
-    question: "For someone who frequently transacts with XRP, which wallet type is most suitable?",
+    question:
+      "For someone who frequently transacts with XRP, which wallet type is most suitable?",
     options: [
-        "Hardware wallet",
-        "Software wallet",
-        "Custodial wallet",
-       "Non-custodial wallet",
+      "Hardware wallet",
+      "Software wallet",
+      "Custodial wallet",
+      "Non-custodial wallet",
     ],
     correctAnswer: "Software wallet",
   },
   {
     id: 5,
-    question: "Before creating your own wallet on the XRP Ledger, what is essential to understand?",
+    question:
+      "Before creating your own wallet on the XRP Ledger, what is essential to understand?",
     options: [
       "Only the price of XRP",
       "How to buy XRP",
@@ -59,6 +59,41 @@ const McqDetails = [
 ];
 
 const ThirdTopic = () => {
+  const [answers, setAnswers] = useState<any>({});
+  const [showResults, setShowResults] = useState(false);
+  const [score, setScore] = useState(0);
+  const [checkAnswers, setCheckAnswers] = useState<any>([]);
+  const [notSubmitted, setnotSubmitted] = useState(true);
+
+  const handleAnswer = (questionId: any, selectedOption: any) => {
+    setAnswers((prevState: any) => ({
+      ...prevState,
+      [questionId]: selectedOption,
+    }));
+  };
+
+  const handleSubmit = () => {
+    let currentScore = 0;
+    for (const question of McqDetails) {
+      const condition = answers[question.id] === question.correctAnswer;
+      if (condition) {
+        console.log("condition", condition);
+
+        checkAnswers.push(condition);
+        currentScore++;
+      }
+    }
+    setScore(currentScore * 20);
+    setShowResults(true);
+    setnotSubmitted(false);
+  };
+
+  const handleReset = () => {
+    setAnswers({});
+    setShowResults(false);
+    setScore(0);
+  };
+
   return (
     <div className="bg-[#070C14] pb-24">
       <div className="flex justify-between items-center px-12 py-4 bg-[#070C14] text-white shadow border border-black border-b-[#616069]">
@@ -70,15 +105,17 @@ const ThirdTopic = () => {
           <div className="w-[40%] h-1.5 border border-[#616069] rounded-full">
             <div
               className="bg-loader h-1.5 rounded-full"
-              style={{ width: "10%" }}
+              style={{ width: `${score}%` }}
             ></div>
           </div>
-          <p className="inline">10/10 XP</p>
+          <p className="inline">{score / 10}/10 XP</p>
         </div>
         <div>
-          <button className="px-4 py-2 font-semibold bg-[#9C9CA1] text-black rounded-sm">
-            End Lesson
-          </button>
+          <Link href="/course">
+            <button className="px-4 py-2 font-semibold bg-[#9C9CA1] text-black rounded-sm">
+              End Lesson
+            </button>
+          </Link>
         </div>
       </div>
       <div className="flex justify-around pt-12">
@@ -124,29 +161,32 @@ const ThirdTopic = () => {
             </ul>
           </div>
           <div className="pb-8">
-          <p>Creating Your Own Wallet</p>
-          <h1 className="py-2">DIY Wallets</h1>
+            <p>Creating Your Own Wallet</p>
+            <h1 className="py-2">DIY Wallets</h1>
             <ul className="list-disc pl-6">
               <li>The XRP Ledger allows you to make your own wallet..</li>
               <li>Requires good tech knowledge.</li>
               <li>Understand accounts, transactions, and ledger first.</li>
             </ul>
-           
-              {/* <li>
+
+            {/* <li>
                 Saves Energy: This method doesn't use a lot of electricity,
                 making it better for the planet than some other systems.
               </li> */}
-            
           </div>
           <div className="pb-8">
             <h1 className="pb-4">Key Takeaways</h1>
             <ul className="list-disc pl-6">
-              <li>Choose Wisely: Your choice affects security and ease of use.</li>
+              <li>
+                Choose Wisely: Your choice affects security and ease of use.
+              </li>
               <li>Custodial: Easy, less control.</li>
               <li>Non-Custodial: More control, secure.</li>
               <li>Software: Convenient, good for spending.</li>
-              <li>DIY Wallets: For tech-savvy users, offers maximum control.</li>
-            
+              <li>
+                DIY Wallets: For tech-savvy users, offers maximum control.
+              </li>
+
               {/* <li>
                 Saves Energy: This method doesn't use a lot of electricity,
                 making it better for the planet than some other systems.
@@ -165,15 +205,15 @@ const ThirdTopic = () => {
                   {question.options.map((option) => (
                     <label
                       key={option}
-                      className=" tems-center  border border-1 border-gray-500 text-white p-4 "
+                      className="w-[300px] items-center border border-1 border-gray-500 text-white p-4 "
                     >
                       <input
                         type="radio"
                         name={`question-${question.id}`}
                         value={option}
-                        // onChange={() => handleAnswer(question.id, option)}
-                        // checked={answers[question.id] === option}
-                        className="mr-2 "
+                        onChange={() => handleAnswer(question.id, option)}
+                        checked={answers[question.id] === option}
+                        className="mr-2 px-10"
                       />
                       {option}
                     </label>
@@ -181,13 +221,29 @@ const ThirdTopic = () => {
                 </div>
               </div>
             ))}
-            <div className="pb-4">
-              <button className="bg-white text-black px-4 py-2 rounded-lg mx-4">
-                Try Again
-              </button>
-              <button className="bg-white text-black px-4 py-2 rounded-lg">
+            <div className="pb-4 ml-6">
+              <button
+                className="bg-white text-black px-4 py-2 rounded-lg ml-6"
+                onClick={handleSubmit}
+              >
                 Submit
               </button>
+              {score === 100 ? (
+                <button
+                    className="bg-white text-black px-4 py-2 rounded-lg mx-4 disabled:cursor-not-allowed disabled:bg-opacity-40"
+                    onClick={() => console.log("calling nft")}
+                  >
+                    Mint NFT
+                  </button>
+              ) : (
+                <button
+                  className="bg-white text-black px-4 py-2 rounded-lg mx-4 disabled:cursor-not-allowed disabled:bg-opacity-40"
+                  onClick={handleReset}
+                  disabled={notSubmitted}
+                >
+                  Try Again
+                </button>
+              )}
             </div>
           </div>
         </div>

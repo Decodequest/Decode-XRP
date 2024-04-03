@@ -1,18 +1,20 @@
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { useState } from "react";
 
 const McqDetails = [
   {
     id: 1,
     question: "What main problem does XRP aim to solve?",
-    options: ["Video streaming", "Social networking", " International payments", "Online shopping"],
-    correctAnswer: " International payments",
+    options: ["Video streaming", "Social networking", "International payments", "Online shopping"],
+    correctAnswer: "International payments",
   },
   {
     id: 2,
     question:
     "Why is XRP considered secure?",
-    options: [" It uses a single server", "It is backed by gold", "Its transactions are spread across many computers", "It is regulated by a central bank"],
-    correctAnswer: "Its transactions are spread across many computers.",
+    options: ["It uses a single server", "It is backed by gold", "It's transactions are spread across many computers", "It is regulated by a central bank"],
+    correctAnswer: "It's transactions are spread across many computers",
   },
   {
     id: 3,
@@ -30,7 +32,7 @@ const McqDetails = [
     question: "How did XRP come into existence?",
     options: [
       "It was mined like Bitcoin.",
-      "It was created in 2011 with a pre-set amount.",
+      "It was created in 2011 with a pre-set amount",
       "It is created every time a transaction is made",
       "It was airdropped to existing cryptocurrency holders",
     ],
@@ -45,6 +47,41 @@ const McqDetails = [
 ];
 
 const SecondTopic = () => {
+  const [answers, setAnswers] = useState<any>({});
+  const [showResults, setShowResults] = useState(false);
+  const [score, setScore] = useState(0);
+  const [checkAnswers, setCheckAnswers] = useState<any>([]);
+  const [notSubmitted, setnotSubmitted] = useState(true);
+
+  const handleAnswer = (questionId: any, selectedOption: any) => {
+    setAnswers((prevState: any) => ({
+      ...prevState,
+      [questionId]: selectedOption,
+    }));
+  };
+
+  const handleSubmit = () => {
+    let currentScore = 0;
+    for (const question of McqDetails) {
+      const condition = answers[question.id] === question.correctAnswer;
+      if (condition) {
+        console.log("condition", condition);
+        
+        checkAnswers.push(condition);
+        currentScore++;
+      }
+    }
+    setScore(currentScore * 20);
+    setShowResults(true);
+    setnotSubmitted(false);
+  };
+
+  const handleReset = () => {
+    setAnswers({});
+    setShowResults(false);
+    setScore(0);
+  };
+  
   return (
     <div className="bg-[#070C14] pb-24">
       <div className="flex justify-between items-center px-12 py-4 bg-[#070C14] text-white shadow border border-black border-b-[#616069]">
@@ -56,15 +93,17 @@ const SecondTopic = () => {
           <div className="w-[40%] h-1.5 border border-[#616069] rounded-full">
             <div
               className="bg-loader h-1.5 rounded-full"
-              style={{ width: "10%" }}
+              style={{ width: `${score}%` }}
             ></div>
           </div>
-          <p className="inline">10/10 XP</p>
+          <p className="inline">{score / 10}/10 XP</p>
         </div>
         <div>
-          <button className="px-4 py-2 font-semibold bg-[#9C9CA1] text-black rounded-sm">
-            End Lesson
-          </button>
+          <Link href="/course">
+            <button className="px-4 py-2 font-semibold bg-[#9C9CA1] text-black rounded-sm">
+              End Lesson
+            </button>
+          </Link>
         </div>
       </div>
       <div className="flex justify-around pt-12">
@@ -151,14 +190,17 @@ const SecondTopic = () => {
                 </h2>
                 <div className="grid grid-cols-2 gap-4">
                   {question.options.map((option) => (
-                    <label key={option} className=" tems-center  border border-1 border-gray-500 text-white p-4 ">
+                    <label
+                      key={option}
+                      className="w-[300px] items-center border border-1 border-gray-500 text-white p-4 "
+                    >
                       <input
                         type="radio"
                         name={`question-${question.id}`}
                         value={option}
-                        // onChange={() => handleAnswer(question.id, option)}
-                        // checked={answers[question.id] === option}
-                        className="mr-2 "
+                        onChange={() => handleAnswer(question.id, option)}
+                        checked={answers[question.id] === option}
+                        className="mr-2 px-10"
                       />
                       {option}
                     </label>
@@ -166,9 +208,32 @@ const SecondTopic = () => {
                 </div>
               </div>
             ))}
-            <div className="pb-4">
-                <button className="bg-white text-black px-4 py-2 rounded-lg mx-4">Try Again</button>
-                <button className="bg-white text-black px-4 py-2 rounded-lg">Submit</button>
+            <div className="pb-4 ml-6">
+              <button
+                  className="bg-white text-black px-4 py-2 rounded-lg ml-6"
+                  onClick={handleSubmit}
+              >
+                  Submit
+                </button>
+                {score === 100 ? (
+                <Link href="/course/third-topic">
+                  <button
+                    className="bg-white text-black px-4 py-2 rounded-lg mx-4 disabled:cursor-not-allowed disabled:bg-opacity-40"
+                    onClick={handleReset}
+                    disabled={notSubmitted}
+                  >
+                    Next
+                  </button>
+                </Link>
+              ) : (
+                <button
+                  className="bg-white text-black px-4 py-2 rounded-lg mx-4 disabled:cursor-not-allowed disabled:bg-opacity-40"
+                  onClick={handleReset}
+                  disabled={notSubmitted}
+                >
+                  Try Again
+                </button>
+              )}
             </div>
           </div>
         </div>

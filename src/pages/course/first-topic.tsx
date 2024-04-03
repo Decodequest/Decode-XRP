@@ -1,4 +1,6 @@
-import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, CheckIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { useState } from "react";
 
 const McqDetails = [
   {
@@ -45,6 +47,39 @@ const McqDetails = [
 ];
 
 const FirstTopic = () => {
+  const [answers, setAnswers] = useState<any>({});
+  const [showResults, setShowResults] = useState(false);
+  const [score, setScore] = useState(0);
+  const [checkAnswers, setCheckAnswers] = useState<any>([]);
+  const [notSubmitted, setnotSubmitted] = useState(true);
+
+  const handleAnswer = (questionId: any, selectedOption: any) => {
+    setAnswers((prevState: any) => ({
+      ...prevState,
+      [questionId]: selectedOption,
+    }));
+  };
+
+  const handleSubmit = () => {
+    let currentScore = 0;
+    for (const question of McqDetails) {
+      const condition = answers[question.id] === question.correctAnswer;
+      if (condition) {
+        checkAnswers.push(condition);
+        currentScore++;
+      }
+    }
+    setScore(currentScore * 20);
+    setShowResults(true);
+    setnotSubmitted(false);
+  };
+
+  const handleReset = () => {
+    setAnswers({});
+    setShowResults(false);
+    setScore(0);
+  };
+
   return (
     <div className="bg-[#070C14] pb-24">
       <div className="flex justify-between items-center px-12 py-4 bg-[#070C14] text-white shadow border border-black border-b-[#616069]">
@@ -56,15 +91,17 @@ const FirstTopic = () => {
           <div className="w-[40%] h-1.5 border border-[#616069] rounded-full">
             <div
               className="bg-loader h-1.5 rounded-full"
-              style={{ width: "10%" }}
+              style={{ width: `${score}%` }}
             ></div>
           </div>
-          <p className="inline">10/10 XP</p>
+          <p className="inline">{score / 10}/10 XP</p>
         </div>
         <div>
-          <button className="px-4 py-2 font-semibold bg-[#9C9CA1] text-black rounded-sm">
-            End Lesson
-          </button>
+          <Link href="/course">
+            <button className="px-4 py-2 font-semibold bg-[#9C9CA1] text-black rounded-sm">
+              End Lesson
+            </button>
+          </Link>
         </div>
       </div>
       <div className="flex justify-around pt-12">
@@ -144,24 +181,52 @@ const FirstTopic = () => {
                 </h2>
                 <div className="grid grid-cols-2 gap-4">
                   {question.options.map((option) => (
-                    <label key={option} className=" tems-center  border border-1 border-gray-500 text-white p-4 ">
+                    <>
+                    <label
+                      key={option}
+                      className=" tems-center  border border-1 border-gray-500 text-white p-4 "
+                    >
                       <input
                         type="radio"
                         name={`question-${question.id}`}
                         value={option}
-                        // onChange={() => handleAnswer(question.id, option)}
-                        // checked={answers[question.id] === option}
-                        className="mr-2 "
+                        onChange={() => handleAnswer(question.id, option)}
+                        checked={answers[question.id] === option}
+                        className="mr-2 px-10"
                       />
                       {option}
-                    </label>
+                    </label></>
                   ))}
                 </div>
               </div>
             ))}
+
             <div className="pb-4">
-                <button className="bg-white text-black px-4 py-2 rounded-lg mx-4">Try Again</button>
-                <button className="bg-white text-black px-4 py-2 rounded-lg">Submit</button>
+              <button
+                className="bg-white text-black px-4 py-2 rounded-lg ml-6"
+                onClick={handleSubmit}
+              >
+                Submit
+              </button>
+              {score === 100 ? (
+                <Link href="/course/second-topic">
+                  <button
+                    className="bg-white text-black px-4 py-2 rounded-lg mx-4 disabled:cursor-not-allowed disabled:bg-opacity-40"
+                    onClick={handleReset}
+                    disabled={notSubmitted}
+                  >
+                    Next
+                  </button>
+                </Link>
+              ) : (
+                <button
+                  className="bg-white text-black px-4 py-2 rounded-lg mx-4 disabled:cursor-not-allowed disabled:bg-opacity-40"
+                  onClick={handleReset}
+                  disabled={notSubmitted}
+                >
+                  Try Again
+                </button>
+              )}
             </div>
           </div>
         </div>
