@@ -4,15 +4,14 @@ import Link from "next/link";
 import React, { useState } from "react";
 
 const Form3 = () => {
-  const { userDeatils, setUserDetails } = useStateContext();  
-  const[skills, setSkills] = useState("");
+  const { userDeatils, setUserDetails } = useStateContext();
+  const [skills, setSkills] = useState("");
 
-  const SkillsObj = ["Beginner", "Intermediate", "Advance"]
+  const SkillsObj = ["Beginner", "Intermediate", "Advance"];
   return (
     <Container>
-      <div className="bg-[#080714] w-full bg-opacity-[70%] h-[600px]">
-        {/* <p className="text-white">Connect wallet to start learning</p> */}
-        <div className=" flex flex-col p-6">
+      <div className="bg-[#080714] w-full bg-opacity-[70%]">
+        <div className=" flex flex-col p-8">
           <p className="text-white text-center flex  text-[29px] pt-10">
             Before we dive in, help <br />
             &nbsp; help us know you better
@@ -23,33 +22,39 @@ const Form3 = () => {
               className="bg-[#fff] h-1.5 w-1 rounded-full"
               style={{ width: "60%" }}
             ></div>
-
-            <p className="text-sm text-[#F5F5F5] pt-10 italic">
-              How woyld you rate your current <br />
-              knoweldge of blockchain technology?
+          </div>
+          <div>
+            <p className="w-full text-sm text-[#F5F5F5] pt-10 italic">
+              How woyld you rate your current knoweldge of blockchain
+              technology?
             </p>
           </div>
-
-          <div className="pt-10">
-            <div
-              className="bg-[#fff] h-1.5 w-1 rounded-full"
-              style={{ width: "20%" }}
-            ></div>
-          </div>
-          <div className="pt-10 pl-4">
+          <div className="pt-10 flex flex-col gap-y-10 w-full">
             {SkillsObj.map((item, index) => {
-              return <button
-                  type="button"
-                  key={index}
-                  onClick={() => setSkills(item)}
-                  className="bg-black px-10 py-3 w-[140px] text-xs font-bold text-white border border-1 border-gray-600"
+              return (
+                <div
+                  className={`w-full border  text-white p-4 bg-black ${
+                    skills === item
+                      ? " border-1 border-white"
+                      : "border-gray-800"
+                  }`}
                 >
-                  {item}
-                </button>
+                  <label key={index} className="w-full items-center">
+                    <input
+                      type="radio"
+                      name={item}
+                      value={item}
+                      onChange={() => setSkills(item)}
+                      checked={skills === item}
+                      className="mr-2 px-10"
+                    />
+                    {item}
+                  </label>
+                </div>
+              );
             })}
           </div>
-
-          <div className="flex pt-[124px] gap-6">
+          <div className="flex pt-10 gap-6">
             <Link href="/form2">
               <button
                 type="button"
@@ -61,7 +66,7 @@ const Form3 = () => {
             <Link href="/form4">
               <button
                 type="button"
-                className="bg-white px-8 py-3 w-[260px] text-sm font-bold text-black"
+                className="bg-white px-8 py-3 w-[220px] text-sm font-bold text-black"
                 onClick={() => {
                   setUserDetails((prevState: any) => ({
                     ...prevState,
