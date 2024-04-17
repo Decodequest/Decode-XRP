@@ -1,3 +1,4 @@
+import { useStateContext } from "@/context/ThemeContext";
 import { ArrowLeftIcon, CheckIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useState } from "react";
@@ -47,6 +48,7 @@ const McqDetails = [
 ];
 
 const FirstTopic = () => {
+  const { setUserDetails, account, userDeatils } = useStateContext();
   const [answers, setAnswers] = useState<any>({});
   const [showResults, setShowResults] = useState(false);
   const [score, setScore] = useState(0);

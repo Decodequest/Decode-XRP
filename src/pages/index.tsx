@@ -7,7 +7,6 @@ import Head from "next/head";
 import db from "../../firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 import { useStateContext } from "@/context/ThemeContext";
-import XPRLWallet from "./login/Xrpl";
 import Metamask from "./login/metamask";
 import { useRouter } from 'next/router';
 
@@ -34,7 +33,6 @@ export default function Home(details: any) {
         <p className="text-white text-center flex justify-center text-[39px] px-10 py-5">
           Connect wallet to start learning
         </p>
-        <XPRLWallet />
         <Metamask />
       </div>
     </Container>

@@ -34,7 +34,13 @@ export const StateProvider: any = ({ children }: any) => {
       Accuracy: 0,
       Speed: 0,
       Strength: 0
-    }
+    },
+    // XrpCourse: {
+    //   course1: 0,
+    //   course2: 0,
+    //   course3: 0,
+    //   total: 0,
+    // }
   });
 
   // Define functions to update the state
