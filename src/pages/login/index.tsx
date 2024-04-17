@@ -1,7 +1,6 @@
 import Container from "@/components/Container";
 import React from "react";
 import Metamask from "./metamask";
-import XPRLWallet from "./Xrpl";
 
 const Login = () => {
   return(
@@ -10,7 +9,6 @@ const Login = () => {
           <p className="text-white text-center flex justify-center text-[39px] px-10 py-5">
             Connect wallet to start learning
           </p>
-          <XPRLWallet/>
           <Metamask/>
         </div>
     </Container>
